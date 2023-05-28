@@ -1,4 +1,3 @@
-use rand::Rng;
 use graph_lib::*;
 
 fn main() {
@@ -10,28 +9,7 @@ fn main() {
         edges : Vec::new()
     };
 
-    // Add random vertices to the graph 
-    let mut num_vertices = 0;
-    loop {
-
-        // Generate x index
-        let rand_x = rand::thread_rng().gen_range(1..=100);
-        // Generate y index
-        let rand_y = rand::thread_rng().gen_range(1..=100);
-
-        let rand_vert = Vertex {
-            x : rand_x,
-            y : rand_y
-        };
-
-        // Add to graph
-        graph.vertices.push(rand_vert);
-
-        if num_vertices == 50 { 
-            break;
-        }
-        num_vertices += 1;
-    }
+    graph.randomise_graph();
 
     println!{"{:?}",graph};
 
