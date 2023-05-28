@@ -1,8 +1,5 @@
 use rand::Rng;
-
-pub mod graph;
-
-use graph::*;
+use graph_lib::*;
 
 fn main() {
     println!("Hello, world!");
