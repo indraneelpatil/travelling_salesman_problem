@@ -27,7 +27,7 @@ pub fn prims_solver(graph : &mut Graph) {
         dist_to_t.insert(closest_vert_ind, std::f64::NEG_INFINITY);
         let parent_edge_ind = vertex_parent[&closest_vert_ind];
         if parent_edge_ind != -1 {
-            graph.edges[parent_edge_ind as usize].on_tsp = true;
+            graph.edges[parent_edge_ind as usize].on_mst = true;
         } 
 
         // Get neighbours of closest vertex

@@ -8,7 +8,7 @@ pub struct Edge {
     pub endpoint1 : i32,
     pub endpoint2 : i32,
     pub weight : f64,
-    pub on_mst : bool
+    pub on_tsp : bool
 }
 
 #[derive(Debug)]
@@ -48,7 +48,7 @@ impl Graph {
             let endpoint1 = &self.vertices[edge.endpoint1 as usize];
             let endpoint2 = &self.vertices[edge.endpoint2 as usize];
             
-            let color = if edge.on_mst { RED } else { BLACK };
+            let color = if edge.on_tsp { RED } else { BLACK };
 
             chart.draw_series(LineSeries::new(
                 vec![(endpoint1.x as i32, endpoint1.y as i32), (endpoint2.x as i32, endpoint2.y as i32)],
@@ -108,7 +108,7 @@ impl Graph {
                 endpoint1,
                 endpoint2,
                 weight,
-                on_mst : false
+                on_tsp : false
             };
             
             if !self.is_duplicate_edge(&edge) && !generated_weights.contains(&weight) && edge.weight < max_weight{
@@ -140,5 +140,21 @@ impl Graph {
         self.generate_edges(tot_edges,tot_vertices,max_weight);
 
 
+    }
+
+    pub fn reset_tsp(&mut self) {
+        for edge in &mut self.edges {
+            edge.on_tsp = false;
+        }
+    }
+    
+    pub fn calculate_cost(&self) -> f64 {
+        let mut cost = 0.0;
+        for edge in &self.edges {
+            if edge.on_tsp {
+                cost += edge.weight;
+            }
+        }
+        cost
     }
 }

@@ -20,7 +20,9 @@ fn main() {
 
     // Invoke MST Solver
     prims_solver(&mut graph);
+    println!("MST cost is {}",graph.calculate_cost());
 
     // Visualise the graph
     graph.plot_graph().unwrap();
+    graph.reset_tsp();
 }
