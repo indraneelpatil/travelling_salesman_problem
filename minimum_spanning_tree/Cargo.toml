@@ -7,3 +7,4 @@ edition = "2021"
 
 [dependencies]
 graph_lib = { path = "../graph_lib" }
+rand = "0.8.5"

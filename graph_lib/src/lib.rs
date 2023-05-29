@@ -1,12 +1,14 @@
+// Created by Indraneel on 29/05/23
 use plotters::prelude::*;
 use rand::Rng;
 
 // Undirected weighted graph
 #[derive(Debug)]
 pub struct Edge {
-    endpoint1 : u32,
-    endpoint2 : u32,
-    weight : f64
+    pub endpoint1 : i32,
+    pub endpoint2 : i32,
+    pub weight : f64,
+    pub on_mst : bool
 }
 
 #[derive(Debug)]
@@ -45,10 +47,12 @@ impl Graph {
         for edge in &self.edges {
             let endpoint1 = &self.vertices[edge.endpoint1 as usize];
             let endpoint2 = &self.vertices[edge.endpoint2 as usize];
+            
+            let color = if edge.on_mst { RED } else { BLACK };
 
             chart.draw_series(LineSeries::new(
                 vec![(endpoint1.x as i32, endpoint1.y as i32), (endpoint2.x as i32, endpoint2.y as i32)],
-                &RED,
+                &color,
             ))?;
         }
 
@@ -92,8 +96,8 @@ impl Graph {
         let mut generated_weights = Vec::new();
         
         while self.edges.len() < num_edges as usize {
-            let endpoint1 = rand::thread_rng().gen_range(0..=num_vertices);
-            let endpoint2 = rand::thread_rng().gen_range(0..=num_vertices);
+            let endpoint1 = rand::thread_rng().gen_range(0..=num_vertices) as i32;
+            let endpoint2 = rand::thread_rng().gen_range(0..=num_vertices) as i32;
             // weight is manhattan distance between the two vertices
             let pt1 = &self.vertices[endpoint1 as usize];
             let pt2 = &self.vertices[endpoint2 as usize];
@@ -104,6 +108,7 @@ impl Graph {
                 endpoint1,
                 endpoint2,
                 weight,
+                on_mst : false
             };
             
             if !self.is_duplicate_edge(&edge) && !generated_weights.contains(&weight) && edge.weight < max_weight{

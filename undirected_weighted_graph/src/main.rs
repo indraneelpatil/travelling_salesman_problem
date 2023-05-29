@@ -1,7 +1,7 @@
+// Created by Indraneel on 29/05/23
 use graph_lib::*;
 
 fn main() {
-    println!("Hello, world!");
 
     // Create an empty graph
     let mut graph = Graph {
