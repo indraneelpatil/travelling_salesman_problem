@@ -3,7 +3,9 @@ use graph_lib::*;
 
 
 pub mod prims_mst;
+pub mod kruskals_mst;
 use prims_mst::*;
+use kruskals_mst::*;
 
 fn main() {
 
@@ -21,6 +23,7 @@ fn main() {
     // Invoke MST Solver
     prims_solver(&mut graph);
     println!("MST cost is {}",graph.calculate_cost());
+    // TODO preorder traversal of MST
 
     // Visualise the graph
     graph.plot_graph().unwrap();
