@@ -16,8 +16,18 @@ graph_lib library can generate a weighted undirected graph with unique edge weig
 #### Animation
 TODO
 
-### Minimum Spanning Trees
+### Joint State Astar
 
 #### Final solution
+TODO
 
 #### Animation
+TODO
+
+### Linear Programming
+
+#### Final solution
+TODO
+
+#### Animation
+TODO
